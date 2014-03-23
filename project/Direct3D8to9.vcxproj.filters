@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="misc">
+      <UniqueIdentifier>{b8eca352-4f4d-4400-9653-39afc5c0c27a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\inc">
+      <UniqueIdentifier>{b20611e5-9272-48df-a214-d632d6b4bef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\src">
+      <UniqueIdentifier>{d18f571e-eb69-4175-98c7-c03ac925a97c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{a9373cdd-21d2-4b1f-866e-2a9862e3848d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\inc">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="main\src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Direct3D8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DBaseTexture8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DCubeTexture8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DDevice8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DIndexBuffer8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DSurface8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DSwapChain8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DTexture8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DVertexBuffer8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DVolume8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DVolumeTexture8.cpp">
+      <Filter>main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Direct3DCreate8.cpp">
+      <Filter>misc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SpinLock.cpp">
+      <Filter>misc\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Direct3D8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DBaseTexture8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DCubeTexture8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DDevice8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DIndexBuffer8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DSurface8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DSwapChain8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DVolumeTexture8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DVolume8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DVertexBuffer8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3DTexture8.h">
+      <Filter>main\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ComptrGurad.h">
+      <Filter>misc\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3D8to9.h">
+      <Filter>misc\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3D8to9Caps.h">
+      <Filter>misc\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3D8to9Types.h">
+      <Filter>misc\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ObjectPool.h">
+      <Filter>misc\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SpinLock.h">
+      <Filter>misc\inc</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

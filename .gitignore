@@ -1,0 +1,14 @@
+*.aps
+*.bsc
+*.exp
+*.ilk
+*.lastbuildstate
+*.pdb
+*.suo
+*.user
+*.sdf
+*.opensdf
+*.ipch
+*.sln.cache
+bin/
+obj/

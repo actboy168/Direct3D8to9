@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <PROJECT_ROOT>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))</PROJECT_ROOT>
+    <PROJECT_BIN>$(PROJECT_ROOT)\bin\$(Configuration)\</PROJECT_BIN>
+    <PROJECT_OBJ>$(PROJECT_ROOT)\obj\$(Configuration)\$(ProjectName)\</PROJECT_OBJ>
+    <DXSDK_INC>$(PROJECT_ROOT)\dxsdk\include\</DXSDK_INC>
+    <DXSDK_LIB>$(PROJECT_ROOT)\dxsdk\lib\$(PlatformTarget)\</DXSDK_LIB>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(PROJECT_BIN)</OutDir>
+    <IntDir>$(PROJECT_OBJ)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(DXSDK_INC);%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(DXSDK_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="PROJECT_ROOT">
+      <Value>$(PROJECT_ROOT)</Value>
+    </BuildMacro>
+    <BuildMacro Include="PROJECT_BIN">
+      <Value>$(PROJECT_BIN)</Value>
+    </BuildMacro>
+    <BuildMacro Include="PROJECT_OBJ">
+      <Value>$(PROJECT_OBJ)</Value>
+    </BuildMacro>
+    <BuildMacro Include="DXSDK_INC">
+      <Value>$(DXSDK_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="DXSDK_LIB">
+      <Value>$(DXSDK_LIB)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
