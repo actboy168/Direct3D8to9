@@ -6,7 +6,7 @@
     <PROJECT_BIN>$(PROJECT_ROOT)\bin\$(Configuration)\</PROJECT_BIN>
     <PROJECT_OBJ>$(PROJECT_ROOT)\obj\$(Configuration)\$(ProjectName)\</PROJECT_OBJ>
     <DXSDK_INC>$(PROJECT_ROOT)\dxsdk\include\</DXSDK_INC>
-    <DXSDK_LIB>$(PROJECT_ROOT)\dxsdk\lib\$(PlatformTarget)\</DXSDK_LIB>
+    <DXSDK_LIB>$(PROJECT_ROOT)\dxsdk\lib\$(PlatformShortName)\</DXSDK_LIB>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(PROJECT_BIN)</OutDir>
