@@ -418,7 +418,13 @@ STDMETHODIMP CDirect3DDevice8::GetRenderTarget(THIS_ IDirect3DSurface8** ppRende
 
 STDMETHODIMP CDirect3DDevice8::GetDepthStencilSurface(THIS_ IDirect3DSurface8** ppZStencilSurface)
 {
-	return E_NOTIMPL;
+	IDirect3DSurface9* pSurface9 = NULL;
+	HRESULT hr = pDevice9->GetDepthStencilSurface(&pSurface9);
+	if (SUCCEEDED(hr))
+	{
+		*ppZStencilSurface = SurfacePool.Create(pSurface9, this);
+	}
+	return hr;
 }
 
 STDMETHODIMP CDirect3DDevice8::BeginScene(THIS)
@@ -583,7 +589,8 @@ STDMETHODIMP CDirect3DDevice8::ValidateDevice(THIS_ DWORD* pNumPasses)
 
 STDMETHODIMP CDirect3DDevice8::GetInfo(THIS_ DWORD DevInfoID, void* pDevInfoStruct, DWORD DevInfoStructSize)
 {
-	return E_NOTIMPL;
+	// see http://msdn.microsoft.com/en-us/library/ms889650.aspx
+	return S_FALSE;
 }
 
 STDMETHODIMP CDirect3DDevice8::SetPaletteEntries(THIS_ UINT PaletteNumber, CONST PALETTEENTRY* pEntries)
@@ -628,10 +635,8 @@ STDMETHODIMP CDirect3DDevice8::DrawIndexedPrimitiveUP(THIS_ D3DPRIMITIVETYPE Pri
 
 STDMETHODIMP CDirect3DDevice8::ProcessVertices(THIS_ UINT SrcStartIndex, UINT DestIndex, UINT VertexCount, IDirect3DVertexBuffer8* pDestBuffer, DWORD Flags)
 {
-	// todo
-	//IDirect3DVertexBuffer9* pDestBuffer9 = ((CDirect3DVertexBuffer8*)pDestBuffer)->ToNine();
-	//return pDevice9->ProcessVertices(SrcStartIndex, DestIndex, VertexCount, pDestBuffer9, ?, Flags);
-	return E_NOTIMPL;
+	IDirect3DVertexBuffer9* pDestBuffer9 = ((CDirect3DVertexBuffer8*)pDestBuffer)->ToNine();
+	return pDevice9->ProcessVertices(SrcStartIndex, DestIndex, VertexCount, pDestBuffer9, NULL, Flags);
 }
 
 STDMETHODIMP CDirect3DDevice8::CreateVertexShader(THIS_ CONST DWORD* pDeclaration, CONST DWORD* pFunction, DWORD* pHandle, DWORD Usage)
@@ -682,7 +687,13 @@ STDMETHODIMP CDirect3DDevice8::SetStreamSource(THIS_ UINT StreamNumber, IDirect3
 
 STDMETHODIMP CDirect3DDevice8::GetStreamSource(THIS_ UINT StreamNumber, IDirect3DVertexBuffer8** ppStreamData, UINT* pStride)
 {
-	return E_NOTIMPL;
+	IDirect3DVertexBuffer9* pStreamData9 = NULL;
+	HRESULT hr = pDevice9->GetStreamSource(StreamNumber, &pStreamData9, NULL, pStride);
+	if (SUCCEEDED(hr))
+	{
+		*ppStreamData = VertexBufferPool.Create(pStreamData9, this);
+	}
+	return hr;
 }
 
 STDMETHODIMP CDirect3DDevice8::SetIndices(THIS_ IDirect3DIndexBuffer8* pIndexData, UINT BaseVertexIndex)
@@ -694,7 +705,19 @@ STDMETHODIMP CDirect3DDevice8::SetIndices(THIS_ IDirect3DIndexBuffer8* pIndexDat
 
 STDMETHODIMP CDirect3DDevice8::GetIndices(THIS_ IDirect3DIndexBuffer8** ppIndexData, UINT* pBaseVertexIndex)
 {
-	return E_NOTIMPL;
+	if (!ppIndexData)
+	{
+		return D3DERR_INVALIDCALL;
+	}
+
+	IDirect3DIndexBuffer9* pIndexData9 = NULL;
+	HRESULT hr = pDevice9->GetIndices(&pIndexData9);
+	if (SUCCEEDED(hr))
+	{
+		*ppIndexData = IndexBufferPool.Create(pIndexData9, this);
+		if (pBaseVertexIndex) *pBaseVertexIndex = baseVertexIndex;
+	}
+	return hr;
 }
 
 STDMETHODIMP CDirect3DDevice8::CreatePixelShader(THIS_ CONST DWORD* pFunction, DWORD* pHandle)
