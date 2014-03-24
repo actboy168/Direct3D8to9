@@ -35,14 +35,15 @@ ULONG WINAPI CDirect3DCubeTexture8::AddRef(THIS)
 
 ULONG WINAPI CDirect3DCubeTexture8::Release(THIS)
 {
+	ComptrGurad<IDirect3DCubeTexture9> gurad(pCubeTexture9);
 	ULONG count = pCubeTexture9->Release();
-	if (0 == count)
+	if (1 == count)
 	{
 		pDevice8->CubeTexturePool.Destory(pCubeTexture9);
 		pCubeTexture9 = NULL;
 		delete this;
 	}
-	return count;
+	return count - 1;
 }
 
 STDMETHODIMP CDirect3DCubeTexture8::GetDevice(THIS_ IDirect3DDevice8** ppDevice)

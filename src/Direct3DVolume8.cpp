@@ -33,14 +33,15 @@ ULONG WINAPI CDirect3DVolume8::AddRef(THIS)
 
 ULONG WINAPI CDirect3DVolume8::Release(THIS)
 {
+	ComptrGurad<IDirect3DVolume9> gurad(pVolume9);
 	ULONG count = pVolume9->Release();
-	if (0 == count)
+	if (1 == count)
 	{
 		pDevice8->VolumePool.Destory(pVolume9);
 		pVolume9 = NULL;
 		delete this;
 	}
-	return count;
+	return count - 1;
 }
 
 STDMETHODIMP CDirect3DVolume8::GetDevice(THIS_ IDirect3DDevice8** ppDevice)

@@ -28,14 +28,15 @@ ULONG WINAPI CDirect3DSurface8::AddRef(THIS)
 
 ULONG WINAPI CDirect3DSurface8::Release(THIS)
 {
+	ComptrGurad<IDirect3DSurface9> gurad(pSurface9);
 	ULONG count = pSurface9->Release();
-	if (0 == count)
+	if (1 == count)
 	{
 		pDevice8->SurfacePool.Destory(pSurface9);
 		pSurface9 = NULL;
 		delete this;
 	}
-	return count;
+	return count - 1;
 }
 
 CDirect3DSurface8::~CDirect3DSurface8()

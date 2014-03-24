@@ -33,14 +33,15 @@ ULONG WINAPI CDirect3DSwapChain8::AddRef(THIS)
 
 ULONG WINAPI CDirect3DSwapChain8::Release(THIS)
 {
+	ComptrGurad<IDirect3DSwapChain9> gurad(pSwapChain9);
 	ULONG count = pSwapChain9->Release();
-	if (0 == count)
+	if (1 == count)
 	{
 		pDevice8->SwapChainPool.Destory(pSwapChain9);
 		pSwapChain9 = NULL;
 		delete this;
 	}
-	return count;
+	return count - 1;
 }
 
 STDMETHODIMP CDirect3DSwapChain8::Present(THIS_ CONST RECT* pSourceRect, CONST RECT* pDestRect, HWND hDestWindowOverride, CONST RGNDATA* pDirtyRegion)

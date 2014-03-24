@@ -41,14 +41,15 @@ ULONG WINAPI CDirect3DDevice8::AddRef(THIS)
 
 ULONG WINAPI CDirect3DDevice8::Release(THIS)
 {
-	DWORD refCount = pDevice9->Release();
-	if (0 == refCount)
+	ComptrGurad<IDirect3DDevice9> gurad(pDevice9);
+	DWORD count = pDevice9->Release();
+	if (1 == count)
 	{
 		pDirect3D8->DevicePool.Destory(pDevice9);
 		pDevice9 = NULL;
 		delete this;
 	}
-	return refCount;
+	return count - 1;
 }
 
 HRESULT CDirect3DDevice8::SetZBufferDiscarding(bool IsEnabled)

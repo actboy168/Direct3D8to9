@@ -13,6 +13,12 @@ public:
 		: ptr_(NULL)
 	{ }
 
+	ComptrGurad(Interface* ptr)
+		: ptr_(ptr)
+	{
+		if (ptr_) ptr_->AddRef();
+	}
+
 	~ComptrGurad()
 	{
 		if (ptr_) ptr_->Release();

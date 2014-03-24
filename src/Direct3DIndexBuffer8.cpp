@@ -33,14 +33,15 @@ ULONG WINAPI CDirect3DIndexBuffer8::AddRef(THIS)
 
 ULONG WINAPI CDirect3DIndexBuffer8::Release(THIS)
 {
+	ComptrGurad<IDirect3DIndexBuffer9> gurad(pIndexBuffer9);
 	ULONG count = pIndexBuffer9->Release();
-	if (0 == count)
+	if (1 == count)
 	{
 		pDevice8->IndexBufferPool.Destory(pIndexBuffer9);
 		pIndexBuffer9 = NULL;
 		delete this;
 	}
-	return count;
+	return count - 1;
 }
 
 STDMETHODIMP CDirect3DIndexBuffer8::GetDevice(THIS_ IDirect3DDevice8** ppDevice)

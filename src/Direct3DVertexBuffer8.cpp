@@ -33,14 +33,15 @@ ULONG WINAPI CDirect3DVertexBuffer8::AddRef(THIS)
 
 ULONG WINAPI CDirect3DVertexBuffer8::Release(THIS)
 {
+	ComptrGurad<IDirect3DVertexBuffer9> gurad(pVertexBuffer9);
 	ULONG count = pVertexBuffer9->Release();
-	if (0 == count)
+	if (1 == count)
 	{
 		pDevice8->VertexBufferPool.Destory(pVertexBuffer9);
 		pVertexBuffer9 = NULL;
 		delete this;
 	}
-	return count;
+	return count - 1;
 }
 
 STDMETHODIMP CDirect3DVertexBuffer8::GetDevice(THIS_ IDirect3DDevice8** ppDevice)
