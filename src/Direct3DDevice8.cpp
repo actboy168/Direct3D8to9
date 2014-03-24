@@ -646,12 +646,16 @@ STDMETHODIMP CDirect3DDevice8::CreateVertexShader(THIS_ CONST DWORD* pDeclaratio
 
 STDMETHODIMP CDirect3DDevice8::SetVertexShader(THIS_ DWORD Handle)
 {
+	if (Handle & D3DFVF_RESERVED0)
+	{
+		return E_NOTIMPL;
+	}
 	return pDevice9->SetFVF(Handle);
 }
 
 STDMETHODIMP CDirect3DDevice8::GetVertexShader(THIS_ DWORD* pHandle)
 {
-	return E_NOTIMPL;
+	return pDevice9->GetFVF(pHandle);
 }
 
 STDMETHODIMP CDirect3DDevice8::DeleteVertexShader(THIS_ DWORD Handle)
