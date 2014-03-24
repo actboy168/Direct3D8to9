@@ -273,10 +273,8 @@ STDMETHODIMP CDirect3DDevice8::CreateIndexBuffer(THIS_ UINT Length, DWORD Usage,
 
 STDMETHODIMP CDirect3DDevice8::CreateRenderTarget(THIS_ UINT Width, UINT Height, D3DFORMAT Format, D3DMULTISAMPLE_TYPE MultiSample, BOOL Lockable, IDirect3DSurface8** ppSurface)
 {
-	HRESULT hr = D3DERR_NOTAVAILABLE;
-
 	IDirect3D9* pDirect3D9 = NULL;
-	hr = pDevice9->GetDirect3D(&pDirect3D9);
+	HRESULT hr = pDevice9->GetDirect3D(&pDirect3D9);
 	if (SUCCEEDED(hr))
 	{
 		DWORD multiSampleQuality;
@@ -419,7 +417,13 @@ STDMETHODIMP CDirect3DDevice8::SetRenderTarget(THIS_ IDirect3DSurface8* pRenderT
 
 STDMETHODIMP CDirect3DDevice8::GetRenderTarget(THIS_ IDirect3DSurface8** ppRenderTarget)
 {
-	return E_NOTIMPL;
+	IDirect3DSurface9* pSurface9 = NULL;
+	HRESULT hr = pDevice9->GetRenderTarget(0, &pSurface9);
+	if (SUCCEEDED(hr))
+	{
+		*ppRenderTarget = SurfacePool.Create(pSurface9, this);
+	}
+	return hr;
 }
 
 STDMETHODIMP CDirect3DDevice8::GetDepthStencilSurface(THIS_ IDirect3DSurface8** ppZStencilSurface)
