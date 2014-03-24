@@ -43,16 +43,11 @@ ULONG WINAPI CDirect3DIndexBuffer8::Release(THIS)
 
 STDMETHODIMP CDirect3DIndexBuffer8::GetDevice(THIS_ IDirect3DDevice8** ppDevice)
 {
-	HRESULT result = D3DERR_INVALIDCALL;
-
-	if (pDevice8 != NULL)
-	{
-		pDevice8->AddRef();
-		*ppDevice = pDevice8;
-		result = D3D_OK;
-	}
-
-	return result;
+	if (pDevice8 == NULL)
+		return D3DERR_INVALIDCALL;
+	pDevice8->AddRef();
+	*ppDevice = pDevice8;
+	return D3D_OK;
 }
 
 STDMETHODIMP CDirect3DIndexBuffer8::SetPrivateData(THIS_ REFGUID refguid, CONST void* pData, DWORD SizeOfData, DWORD Flags)

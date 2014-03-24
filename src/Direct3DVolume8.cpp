@@ -43,16 +43,11 @@ ULONG WINAPI CDirect3DVolume8::Release(THIS)
 
 STDMETHODIMP CDirect3DVolume8::GetDevice(THIS_ IDirect3DDevice8** ppDevice)
 {
-	HRESULT result = D3DERR_INVALIDCALL;
-
-	if (pDevice8 != NULL)
-	{
-		pDevice8->AddRef();
-		*ppDevice = pDevice8;
-		result = D3D_OK;
-	}
-
-	return result;
+	if (pDevice8 == NULL)
+		return D3DERR_INVALIDCALL;
+	pDevice8->AddRef();
+	*ppDevice = pDevice8;
+	return D3D_OK;
 }
 
 STDMETHODIMP CDirect3DVolume8::SetPrivateData(THIS_ REFGUID refguid, CONST void* pData, DWORD SizeOfData, DWORD Flags)
@@ -72,16 +67,11 @@ STDMETHODIMP CDirect3DVolume8::FreePrivateData(THIS_ REFGUID refguid)
 
 STDMETHODIMP CDirect3DVolume8::GetContainer(THIS_ REFIID riid, void** ppContainer)
 {
-	HRESULT result = D3DERR_INVALIDCALL;
-
-	if (pVolumeTexture != NULL)
-	{
-		pVolumeTexture->AddRef();
-		*ppContainer = pVolumeTexture;
-		result = D3D_OK;
-	}
-
-	return result;
+	if (pVolumeTexture == NULL)
+		return D3DERR_INVALIDCALL;
+	pVolumeTexture->AddRef();
+	*ppContainer = pVolumeTexture;
+	return D3D_OK;
 }
 
 STDMETHODIMP CDirect3DVolume8::GetDesc(THIS_ D3D8VOLUME_DESC *pDesc)

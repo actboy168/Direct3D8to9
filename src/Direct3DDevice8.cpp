@@ -72,16 +72,11 @@ STDMETHODIMP CDirect3DDevice8::ResourceManagerDiscardBytes(THIS_ DWORD Bytes)
 
 STDMETHODIMP CDirect3DDevice8::GetDirect3D(THIS_ IDirect3D8** ppD3D8)
 {
-	HRESULT result = D3DERR_INVALIDCALL;
-
-	if (pDirect3D8 != NULL)
-	{
-		pDirect3D8->AddRef();
-		*ppD3D8 = pDirect3D8;
-		result = D3D_OK;
-	}
-
-	return result;
+	if (pDirect3D8 == NULL)
+		return D3DERR_INVALIDCALL;
+	pDirect3D8->AddRef();
+	*ppD3D8 = pDirect3D8;
+	return D3D_OK;
 }
 
 STDMETHODIMP CDirect3DDevice8::GetDeviceCaps(THIS_ D3DCAPS8* pCaps)
@@ -120,10 +115,8 @@ STDMETHODIMP_(BOOL) CDirect3DDevice8::ShowCursor(THIS_ BOOL bShow)
 
 STDMETHODIMP CDirect3DDevice8::CreateAdditionalSwapChain(THIS_ D3D8PRESENT_PARAMETERS* pPresentationParameters, IDirect3DSwapChain8** pSwapChain)
 {
-	HRESULT hr = D3DERR_NOTAVAILABLE;
-
 	IDirect3D9* pDirect3D9 = NULL;
-	hr = pDevice9->GetDirect3D(&pDirect3D9);
+	HRESULT hr = pDevice9->GetDirect3D(&pDirect3D9);
 	if (SUCCEEDED(hr))
 	{
 		D3DPRESENT_PARAMETERS D3DPresentationParameters9;
@@ -157,10 +150,9 @@ STDMETHODIMP CDirect3DDevice8::CreateAdditionalSwapChain(THIS_ D3D8PRESENT_PARAM
 
 STDMETHODIMP CDirect3DDevice8::Reset(THIS_ D3D8PRESENT_PARAMETERS* pPresentationParameters)
 {
-	HRESULT result = D3DERR_INVALIDCALL;
-
 	IDirect3D9* pDirect3D9 = NULL;
-	if (SUCCEEDED(pDevice9->GetDirect3D(&pDirect3D9)))
+	HRESULT hr = pDevice9->GetDirect3D(&pDirect3D9);
+	if (SUCCEEDED(hr))
 	{
 		D3DPRESENT_PARAMETERS D3DPresentationParameters9;
 		ZeroMemory(&D3DPresentationParameters9, sizeof(D3DPresentationParameters9));
@@ -178,11 +170,11 @@ STDMETHODIMP CDirect3DDevice8::Reset(THIS_ D3D8PRESENT_PARAMETERS* pPresentation
 		D3DPresentationParameters9.PresentationInterval = pPresentationParameters->FullScreen_PresentationInterval;
 		D3DPresentationParameters9.SwapEffect = pPresentationParameters->SwapEffect;
 		D3DPresentationParameters9.Windowed = pPresentationParameters->Windowed;
-		result = pDevice9->Reset(&D3DPresentationParameters9);
+		hr = pDevice9->Reset(&D3DPresentationParameters9);
 		pDirect3D9->Release();
 	}
 
-	return result;
+	return hr;
 }
 
 STDMETHODIMP CDirect3DDevice8::Present(THIS_ CONST RECT* pSourceRect, CONST RECT* pDestRect, HWND hDestWindowOverride, CONST RGNDATA* pDirtyRegion)
@@ -297,10 +289,8 @@ STDMETHODIMP CDirect3DDevice8::CreateRenderTarget(THIS_ UINT Width, UINT Height,
 
 STDMETHODIMP CDirect3DDevice8::CreateDepthStencilSurface(THIS_ UINT Width, UINT Height, D3DFORMAT Format, D3DMULTISAMPLE_TYPE MultiSample, IDirect3DSurface8** ppSurface)
 {
-	HRESULT hr = D3DERR_NOTAVAILABLE;
-
 	IDirect3D9* pDirect3D9 = NULL;
-	hr = pDevice9->GetDirect3D(&pDirect3D9);
+	HRESULT hr = pDevice9->GetDirect3D(&pDirect3D9);
 	if (SUCCEEDED(hr))
 	{
 		DWORD multiSampleQuality;
@@ -402,10 +392,8 @@ STDMETHODIMP CDirect3DDevice8::SetRenderTarget(THIS_ IDirect3DSurface8* pRenderT
 		return pDevice9->SetDepthStencilSurface(pNewZStencil9);
 	}
 
-	HRESULT hr = D3DERR_INVALIDCALL;
 	IDirect3DSurface9* pRenderTarget9 = ((CDirect3DSurface8*)pRenderTarget)->ToNine();
-	hr = pDevice9->SetRenderTarget(0, pRenderTarget9);
-
+	HRESULT hr = pDevice9->SetRenderTarget(0, pRenderTarget9);
 	if (pNewZStencil != NULL)
 	{
 		IDirect3DSurface9* pNewZStencil9 = ((CDirect3DSurface8*)pNewZStencil)->ToNine();
