@@ -705,11 +705,6 @@ STDMETHODIMP CDirect3DDevice8::SetIndices(THIS_ IDirect3DIndexBuffer8* pIndexDat
 
 STDMETHODIMP CDirect3DDevice8::GetIndices(THIS_ IDirect3DIndexBuffer8** ppIndexData, UINT* pBaseVertexIndex)
 {
-	if (!ppIndexData)
-	{
-		return D3DERR_INVALIDCALL;
-	}
-
 	IDirect3DIndexBuffer9* pIndexData9 = NULL;
 	HRESULT hr = pDevice9->GetIndices(&pIndexData9);
 	if (SUCCEEDED(hr))
