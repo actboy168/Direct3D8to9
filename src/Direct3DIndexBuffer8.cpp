@@ -17,7 +17,9 @@ HRESULT WINAPI CDirect3DIndexBuffer8::QueryInterface(THIS_ REFIID riid, void** p
 		|| riid == IID_IDirect3DResource8 
 		|| riid == IID_IDirect3DIndexBuffer8)
 	{
+		AddRef();
 		*ppvObj = this;
+		return D3D_OK;
 	}
 
 	*ppvObj = NULL;

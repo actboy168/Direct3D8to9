@@ -17,7 +17,9 @@ HRESULT WINAPI CDirect3DBaseTexture8::QueryInterface(THIS_ REFIID riid, void** p
 		|| riid == IID_IDirect3DResource8
 		|| riid == IID_IDirect3DBaseTexture8)
 	{
+		AddRef();
 		*ppvObj = this;
+		return D3D_OK;
 	}
 
 	*ppvObj = NULL;

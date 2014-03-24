@@ -17,7 +17,9 @@ HRESULT WINAPI CDirect3DSwapChain8::QueryInterface(THIS_ REFIID riid, void** ppv
 	if (riid == IID_IUnknown 
 		|| riid == IID_IDirect3DSwapChain8)
 	{
+		AddRef();
 		*ppvObj = this;
+		return D3D_OK;
 	}
 
 	*ppvObj = NULL;
