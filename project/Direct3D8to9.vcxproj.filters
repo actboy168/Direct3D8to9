@@ -62,6 +62,9 @@
     <ClCompile Include="..\src\SpinLock.cpp">
       <Filter>misc\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Direct3D8Guid.cpp">
+      <Filter>misc\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Direct3D8.h">
@@ -113,6 +116,9 @@
       <Filter>misc\inc</Filter>
     </ClInclude>
     <ClInclude Include="..\src\SpinLock.h">
+      <Filter>misc\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Direct3D8to9Guid.h">
       <Filter>misc\inc</Filter>
     </ClInclude>
   </ItemGroup>

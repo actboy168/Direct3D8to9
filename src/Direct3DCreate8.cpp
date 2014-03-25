@@ -1,9 +1,6 @@
 #include "Direct3D8.h"
 
-#pragma comment(lib, "dxguid.lib")
-
 typedef IDirect3D9* (__stdcall* FnDirect3DCreate9)(UINT);
-
 
 extern "C"
 IDirect3D8* __stdcall Direct3DCreate8(UINT /*sdk_version*/)
