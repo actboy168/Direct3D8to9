@@ -90,7 +90,7 @@ STDMETHODIMP_(UINT) CDirect3D8::GetAdapterModeCount(THIS_ UINT Adapter)
 {
 	if (Adapter >= AdapterInformation.size())
 	{
-		return D3DERR_INVALIDCALL;
+		return 0;
 	}
 
 	UINT result = 0;
