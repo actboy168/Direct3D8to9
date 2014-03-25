@@ -62,8 +62,8 @@ STDMETHODIMP CDirect3D8::GetAdapterIdentifier(THIS_ UINT Adapter, DWORD Flags, D
 {
 	D3DADAPTER_IDENTIFIER9 D3DIdentifier9;
 
-	if (Flags == 0) { Flags = 2; }
-	else if (Flags == 2) { Flags = 0; }
+	if      (Flags == 0 /* In dx8 is WHQL */)    { Flags = 2; /* In dx9 is WHQL */ }
+	else if (Flags == 2 /* In dx8 is no WHQL */) { Flags = 0; /* In dx9 is no WHQL */ }
 
 	HRESULT result = pDirect3D9->GetAdapterIdentifier(Adapter, Flags, &D3DIdentifier9);
 
