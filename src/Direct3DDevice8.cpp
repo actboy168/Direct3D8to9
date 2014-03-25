@@ -743,7 +743,13 @@ STDMETHODIMP CDirect3DDevice8::SetVertexShader(THIS_ DWORD Handle)
 	{
 		return E_NOTIMPL;
 	}
-	return pDevice9->SetFVF(Handle);
+
+	HRESULT hr = pDevice9->SetVertexShader(NULL);
+	if (SUCCEEDED(hr))
+	{
+		hr = pDevice9->SetFVF(Handle);
+	}
+	return hr;
 }
 
 STDMETHODIMP CDirect3DDevice8::GetVertexShader(THIS_ DWORD* pHandle)
