@@ -9,6 +9,8 @@ CDirect3DIndexBuffer8::CDirect3DIndexBuffer8(IDirect3DIndexBuffer9* indexbuffer,
 
 CDirect3DIndexBuffer8::~CDirect3DIndexBuffer8()
 {
+	pDevice8->IndexBufferPool.Destory(pIndexBuffer9);
+	pIndexBuffer9 = NULL;
 }
 
 HRESULT WINAPI CDirect3DIndexBuffer8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
@@ -37,8 +39,6 @@ ULONG WINAPI CDirect3DIndexBuffer8::Release(THIS)
 	ULONG count = pIndexBuffer9->Release();
 	if (1 == count)
 	{
-		pDevice8->IndexBufferPool.Destory(pIndexBuffer9);
-		pIndexBuffer9 = NULL;
 		delete this;
 	}
 	return count - 1;

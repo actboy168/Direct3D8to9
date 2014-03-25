@@ -10,6 +10,8 @@ CDirect3DSwapChain8::CDirect3DSwapChain8(IDirect3DSwapChain9* swapchain, CDirect
 
 CDirect3DSwapChain8::~CDirect3DSwapChain8()
 {
+	pDevice8->SwapChainPool.Destory(pSwapChain9);
+	pSwapChain9 = NULL;
 }
 
 HRESULT WINAPI CDirect3DSwapChain8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
@@ -37,8 +39,6 @@ ULONG WINAPI CDirect3DSwapChain8::Release(THIS)
 	ULONG count = pSwapChain9->Release();
 	if (1 == count)
 	{
-		pDevice8->SwapChainPool.Destory(pSwapChain9);
-		pSwapChain9 = NULL;
 		delete this;
 	}
 	return count - 1;

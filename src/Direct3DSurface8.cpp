@@ -7,6 +7,12 @@ CDirect3DSurface8::CDirect3DSurface8(IDirect3DSurface9* surface, CDirect3DDevice
 {
 }
 
+CDirect3DSurface8::~CDirect3DSurface8()
+{
+	pDevice8->SurfacePool.Destory(pSurface9);
+	pSurface9 = NULL;
+}
+
 HRESULT WINAPI CDirect3DSurface8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
 {
 	if (riid == IID_IUnknown 
@@ -32,15 +38,9 @@ ULONG WINAPI CDirect3DSurface8::Release(THIS)
 	ULONG count = pSurface9->Release();
 	if (1 == count)
 	{
-		pDevice8->SurfacePool.Destory(pSurface9);
-		pSurface9 = NULL;
 		delete this;
 	}
 	return count - 1;
-}
-
-CDirect3DSurface8::~CDirect3DSurface8()
-{
 }
 
 STDMETHODIMP CDirect3DSurface8::GetDevice(THIS_ IDirect3DDevice8** ppDevice)

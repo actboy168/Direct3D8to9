@@ -10,6 +10,8 @@ CDirect3DVolumeTexture8::CDirect3DVolumeTexture8(IDirect3DVolumeTexture9* textur
 
 CDirect3DVolumeTexture8::~CDirect3DVolumeTexture8()
 {
+	pDevice8->VolumeTexturePool.Destory(pVolumeTexture9);
+	pVolumeTexture9 = NULL;
 }
 
 HRESULT WINAPI CDirect3DVolumeTexture8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
@@ -39,8 +41,6 @@ ULONG WINAPI CDirect3DVolumeTexture8::Release(THIS)
 	ULONG count = pVolumeTexture9->Release();
 	if (1 == count)
 	{
-		pDevice8->VolumeTexturePool.Destory(pVolumeTexture9);
-		pVolumeTexture9 = NULL;
 		delete this;
 	}
 	return count - 1;

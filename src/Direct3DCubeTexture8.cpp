@@ -10,6 +10,8 @@ CDirect3DCubeTexture8::CDirect3DCubeTexture8(IDirect3DCubeTexture9* texture, CDi
 
 CDirect3DCubeTexture8::~CDirect3DCubeTexture8()
 {
+	pDevice8->CubeTexturePool.Destory(pCubeTexture9);
+	pCubeTexture9 = NULL;
 }
 
 HRESULT WINAPI CDirect3DCubeTexture8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
@@ -39,8 +41,6 @@ ULONG WINAPI CDirect3DCubeTexture8::Release(THIS)
 	ULONG count = pCubeTexture9->Release();
 	if (1 == count)
 	{
-		pDevice8->CubeTexturePool.Destory(pCubeTexture9);
-		pCubeTexture9 = NULL;
 		delete this;
 	}
 	return count - 1;

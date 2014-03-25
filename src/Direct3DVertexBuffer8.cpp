@@ -9,6 +9,8 @@ CDirect3DVertexBuffer8::CDirect3DVertexBuffer8(IDirect3DVertexBuffer9* vertexbuf
 
 CDirect3DVertexBuffer8::~CDirect3DVertexBuffer8()
 {
+	pDevice8->VertexBufferPool.Destory(pVertexBuffer9);
+	pVertexBuffer9 = NULL;
 }
 
 HRESULT WINAPI CDirect3DVertexBuffer8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
@@ -37,8 +39,6 @@ ULONG WINAPI CDirect3DVertexBuffer8::Release(THIS)
 	ULONG count = pVertexBuffer9->Release();
 	if (1 == count)
 	{
-		pDevice8->VertexBufferPool.Destory(pVertexBuffer9);
-		pVertexBuffer9 = NULL;
 		delete this;
 	}
 	return count - 1;

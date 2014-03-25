@@ -9,6 +9,7 @@ CDirect3DBaseTexture8::CDirect3DBaseTexture8(IDirect3DBaseTexture9* texture, CDi
 
 CDirect3DBaseTexture8::~CDirect3DBaseTexture8()
 {
+	pBaseTexture9 = NULL;
 }
 
 HRESULT WINAPI CDirect3DBaseTexture8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
@@ -36,7 +37,6 @@ ULONG WINAPI CDirect3DBaseTexture8::Release(THIS)
 	ULONG count = pBaseTexture9->Release();
 	if (0 == count)
 	{
-		pBaseTexture9 = NULL;
 		delete this;
 	}
 	return count;

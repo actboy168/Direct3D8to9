@@ -10,6 +10,8 @@ CDirect3DVolume8::CDirect3DVolume8(IDirect3DVolume9* volume, CDirect3DDevice8* d
 
 CDirect3DVolume8::~CDirect3DVolume8()
 {
+	pDevice8->VolumePool.Destory(pVolume9);
+	pVolume9 = NULL;
 }
 
 HRESULT WINAPI CDirect3DVolume8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
@@ -37,8 +39,6 @@ ULONG WINAPI CDirect3DVolume8::Release(THIS)
 	ULONG count = pVolume9->Release();
 	if (1 == count)
 	{
-		pDevice8->VolumePool.Destory(pVolume9);
-		pVolume9 = NULL;
 		delete this;
 	}
 	return count - 1;

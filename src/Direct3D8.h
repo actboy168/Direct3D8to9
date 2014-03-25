@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef POINTER_64
-#define POINTER_64 __ptr64
-#endif
-
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
@@ -13,7 +9,6 @@
 #include "ObjectPool.h"
 
 #include <array>
-#include <cassert>
 #include <vector>
 
 class CDirect3DDevice8;

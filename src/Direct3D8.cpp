@@ -15,7 +15,9 @@ CDirect3D8::CDirect3D8(IDirect3D9* d3d)
 }
 
 CDirect3D8::~CDirect3D8()
-{ }
+{
+	pDirect3D9 = NULL;
+}
 
 HRESULT WINAPI CDirect3D8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
 {
@@ -41,7 +43,6 @@ ULONG WINAPI CDirect3D8::Release(THIS)
 	ULONG count = pDirect3D9->Release();
 	if (0 == count)
 	{
-		pDirect3D9 = NULL;
 		delete this;
 	}
 	return count;

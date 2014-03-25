@@ -18,7 +18,10 @@ CDirect3DDevice8::CDirect3DDevice8(IDirect3DDevice9* device, CDirect3D8* d3d)
 }
 
 CDirect3DDevice8::~CDirect3DDevice8()
-{ }
+{
+	pDirect3D8->DevicePool.Destory(pDevice9);
+	pDevice9 = NULL;
+}
 
 HRESULT WINAPI CDirect3DDevice8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
 {
@@ -45,8 +48,6 @@ ULONG WINAPI CDirect3DDevice8::Release(THIS)
 	DWORD count = pDevice9->Release();
 	if (1 == count)
 	{
-		pDirect3D8->DevicePool.Destory(pDevice9);
-		pDevice9 = NULL;
 		delete this;
 	}
 	return count - 1;
