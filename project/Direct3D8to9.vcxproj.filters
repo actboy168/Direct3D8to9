@@ -21,6 +21,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="misc\other">
+      <UniqueIdentifier>{425bd5d1-5dfd-46f6-a08b-070b536ea62d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Direct3D8.cpp">
@@ -121,5 +124,15 @@
     <ClInclude Include="..\src\Direct3D8to9Guid.h">
       <Filter>misc\inc</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Direct3D8to9.rc">
+      <Filter>misc\other</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Direct3D8to9.def">
+      <Filter>misc\other</Filter>
+    </None>
   </ItemGroup>
 </Project>

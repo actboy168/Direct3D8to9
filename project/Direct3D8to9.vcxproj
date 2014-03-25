@@ -46,6 +46,12 @@
     <ClInclude Include="..\src\ObjectPool.h" />
     <ClInclude Include="..\src\SpinLock.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Direct3D8to9.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Direct3D8to9.def" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D3A9E9A6-062D-4C26-BF35-8F18ED840D8F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -93,6 +99,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

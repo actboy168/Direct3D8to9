@@ -1,0 +1,50 @@
+#include <Windows.h>
+
+#define VERSION_MAJOR 1
+#define VERSION_MINOR 0
+#define VERSION_REVISED 1
+#define VERSION_BUILD 0
+
+#define VERSION_STR1(a,b,c,d) #a ", " #b ", " #c ", " #d
+#define VERSION_STR2(a,b,c,d) VERSION_STR1(a,b,c,d)
+#define VERSION_NUMBER        VERSION_MAJOR,VERSION_MINOR,VERSION_REVISED,VERSION_BUILD
+#define VERSION_NUMBER_STRING VERSION_STR2(VERSION_MAJOR,VERSION_MINOR,VERSION_REVISED,VERSION_BUILD)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION VERSION_NUMBER
+ PRODUCTVERSION VERSION_NUMBER
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE VFT_DLL
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "Comments", ""
+            VALUE "CompanyName", ""
+            VALUE "FileDescription", "A Convertor of Direct3D8 to Direct3D9 Rendering Functions."
+            VALUE "FileVersion", VERSION_NUMBER_STRING
+            VALUE "InternalName", "Direct3D 8 to 9"
+            VALUE "LegalCopyright", "Copyright (C) 2014, actboy168"
+            VALUE "OriginalFilename", "D3D8.dll"
+            VALUE "ProductName", ""
+            VALUE "ProductVersion", VERSION_NUMBER_STRING
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
