@@ -25,7 +25,7 @@ CDirect3DDevice8::~CDirect3DDevice8()
 
 HRESULT WINAPI CDirect3DDevice8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
 {
-	if (riid == IID_IUnknown 
+	if (riid == IID_IUnknown
 		|| riid == IID_IDirect3DDevice8)
 	{
 		AddRef();
@@ -37,7 +37,7 @@ HRESULT WINAPI CDirect3DDevice8::QueryInterface(THIS_ REFIID riid, void** ppvObj
 	return E_NOINTERFACE;
 }
 
-ULONG WINAPI CDirect3DDevice8::AddRef(THIS) 
+ULONG WINAPI CDirect3DDevice8::AddRef(THIS)
 {
 	return pDevice9->AddRef();
 }

@@ -16,7 +16,7 @@ CDirect3DVolume8::~CDirect3DVolume8()
 
 HRESULT WINAPI CDirect3DVolume8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
 {
-	if (riid == IID_IUnknown 
+	if (riid == IID_IUnknown
 		|| riid == IID_IDirect3DVolume8)
 	{
 		AddRef();

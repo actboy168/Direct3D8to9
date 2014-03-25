@@ -2,7 +2,7 @@
 
 #include "Direct3D8.h"
 
-class CDirect3DIndexBuffer8 
+class CDirect3DIndexBuffer8
 	: public IDirect3DIndexBuffer8
 {
 public:

@@ -2,7 +2,7 @@
 
 #include "Direct3D8.h"
 
-class CDirect3DSwapChain8 
+class CDirect3DSwapChain8
 	: public IDirect3DSwapChain8
 {
 public:

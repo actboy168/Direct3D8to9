@@ -16,7 +16,7 @@ CDirect3DVertexBuffer8::~CDirect3DVertexBuffer8()
 HRESULT WINAPI CDirect3DVertexBuffer8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
 {
 	if (riid == IID_IUnknown
-		|| riid == IID_IDirect3DResource8 
+		|| riid == IID_IDirect3DResource8
 		|| riid == IID_IDirect3DVertexBuffer8)
 	{
 		AddRef();

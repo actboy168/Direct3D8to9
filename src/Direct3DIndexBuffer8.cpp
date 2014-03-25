@@ -1,7 +1,7 @@
 #include "Direct3DIndexBuffer8.h"
 #include "Direct3DDevice8.h"
 
-CDirect3DIndexBuffer8::CDirect3DIndexBuffer8(IDirect3DIndexBuffer9* indexbuffer, CDirect3DDevice8* device) 
+CDirect3DIndexBuffer8::CDirect3DIndexBuffer8(IDirect3DIndexBuffer9* indexbuffer, CDirect3DDevice8* device)
 : pIndexBuffer9(indexbuffer)
 , pDevice8(device)
 {
@@ -15,8 +15,8 @@ CDirect3DIndexBuffer8::~CDirect3DIndexBuffer8()
 
 HRESULT WINAPI CDirect3DIndexBuffer8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
 {
-	if (riid == IID_IUnknown 
-		|| riid == IID_IDirect3DResource8 
+	if (riid == IID_IUnknown
+		|| riid == IID_IDirect3DResource8
 		|| riid == IID_IDirect3DIndexBuffer8)
 	{
 		AddRef();

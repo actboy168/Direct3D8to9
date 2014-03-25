@@ -2,7 +2,7 @@
 #include "Direct3DDevice8.h"
 #include "Direct3DVolume8.h"
 
-CDirect3DVolumeTexture8::CDirect3DVolumeTexture8(IDirect3DVolumeTexture9* texture, CDirect3DDevice8* device) 
+CDirect3DVolumeTexture8::CDirect3DVolumeTexture8(IDirect3DVolumeTexture9* texture, CDirect3DDevice8* device)
 : pVolumeTexture9(texture)
 , pDevice8(device)
 {

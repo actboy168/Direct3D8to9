@@ -85,4 +85,4 @@ typedef struct _D3DCAPS8
 #pragma pack()
 #endif
 
-#endif 
+#endif

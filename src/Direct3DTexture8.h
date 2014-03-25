@@ -2,7 +2,7 @@
 
 #include "Direct3D8.h"
 
-class CDirect3DTexture8 
+class CDirect3DTexture8
 	: public IDirect3DTexture8
 {
 public:

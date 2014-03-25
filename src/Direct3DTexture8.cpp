@@ -2,7 +2,7 @@
 #include "Direct3DDevice8.h"
 #include "Direct3DSurface8.h"
 
-CDirect3DTexture8::CDirect3DTexture8(IDirect3DTexture9* texture, CDirect3DDevice8* device) 
+CDirect3DTexture8::CDirect3DTexture8(IDirect3DTexture9* texture, CDirect3DDevice8* device)
 : pTexture9(texture)
 , pDevice8(device)
 {
@@ -18,7 +18,7 @@ HRESULT WINAPI CDirect3DTexture8::QueryInterface(THIS_ REFIID riid, void** ppvOb
 {
 	if (riid == IID_IUnknown
 		|| riid == IID_IDirect3DResource8
-		|| riid == IID_IDirect3DBaseTexture8 
+		|| riid == IID_IDirect3DBaseTexture8
 		|| riid == IID_IDirect3DTexture8)
 	{
 		AddRef();

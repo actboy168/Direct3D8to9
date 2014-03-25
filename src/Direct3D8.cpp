@@ -21,7 +21,7 @@ CDirect3D8::~CDirect3D8()
 
 HRESULT WINAPI CDirect3D8::QueryInterface(THIS_ REFIID riid, void** ppvObj)
 {
-	if (riid == IID_IUnknown 
+	if (riid == IID_IUnknown
 		|| riid == IID_IDirect3D8)
 	{
 		AddRef();
