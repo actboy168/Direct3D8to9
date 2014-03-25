@@ -71,7 +71,7 @@ STDMETHODIMP_(UINT) CDirect3DDevice8::GetAvailableTextureMem(THIS)
 
 STDMETHODIMP CDirect3DDevice8::ResourceManagerDiscardBytes(THIS_ DWORD Bytes)
 {
-	return D3D_OK;
+	return pDevice9->EvictManagedResources();
 }
 
 STDMETHODIMP CDirect3DDevice8::GetDirect3D(THIS_ IDirect3D8** ppD3D8)
@@ -511,11 +511,20 @@ STDMETHODIMP CDirect3DDevice8::GetClipPlane(THIS_ DWORD Index, float* pPlane)
 
 STDMETHODIMP CDirect3DDevice8::SetRenderState(THIS_ D3DRENDERSTATETYPE State, DWORD Value)
 {
+	if (State == 153/*D3DRS_SOFTWAREVERTEXPROCESSING*/)
+	{
+		return pDevice9->SetSoftwareVertexProcessing(!!Value);
+	}
 	return pDevice9->SetRenderState(State, Value);
 }
 
 STDMETHODIMP CDirect3DDevice8::GetRenderState(THIS_ D3DRENDERSTATETYPE State, DWORD* pValue)
 {
+	if (State == 153/*D3DRS_SOFTWAREVERTEXPROCESSING*/)
+	{
+		*pValue = pDevice9->GetSoftwareVertexProcessing()? 1: 0;
+		return D3D_OK;
+	}
 	return pDevice9->GetRenderState(State, pValue);
 }
 
@@ -574,14 +583,96 @@ STDMETHODIMP CDirect3DDevice8::SetTexture(THIS_ DWORD Stage, IDirect3DBaseTextur
 	return pDevice9->SetTexture(Stage, pTexture9);
 }
 
-STDMETHODIMP CDirect3DDevice8::GetTextureStageState(THIS_ DWORD Stage, D3DTEXTURESTAGESTATETYPE Type, DWORD* pValue)
+STDMETHODIMP CDirect3DDevice8::GetTextureStageState(THIS_ DWORD Stage, D3D8TEXTURESTAGESTATETYPE Type, DWORD* pValue)
 {
-	return pDevice9->GetTextureStageState(Stage, Type, pValue);
+	switch (Type)
+	{
+	case D3D8TSS_COLOROP:
+	case D3D8TSS_COLORARG1:
+	case D3D8TSS_COLORARG2:
+	case D3D8TSS_ALPHAOP:
+	case D3D8TSS_ALPHAARG1:
+	case D3D8TSS_ALPHAARG2:
+	case D3D8TSS_BUMPENVMAT00:
+	case D3D8TSS_BUMPENVMAT01:
+	case D3D8TSS_BUMPENVMAT10:
+	case D3D8TSS_BUMPENVMAT11:
+	case D3D8TSS_TEXCOORDINDEX:
+	case D3D8TSS_BUMPENVLSCALE:
+	case D3D8TSS_BUMPENVLOFFSET:
+	case D3D8TSS_TEXTURETRANSFORMFLAGS:
+	case D3D8TSS_COLORARG0:
+	case D3D8TSS_ALPHAARG0:
+	case D3D8TSS_RESULTARG:
+		return pDevice9->GetTextureStageState(Stage, (D3DTEXTURESTAGESTATETYPE)Type, pValue);
+	case D3D8TSS_ADDRESSU:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_ADDRESSU, pValue);
+	case D3D8TSS_ADDRESSV:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_ADDRESSV, pValue);
+	case D3D8TSS_BORDERCOLOR:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_BORDERCOLOR, pValue);
+	case D3D8TSS_MAGFILTER:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_MAGFILTER, pValue);
+	case D3D8TSS_MINFILTER:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_MINFILTER, pValue);
+	case D3D8TSS_MIPFILTER:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_MIPFILTER, pValue);
+	case D3D8TSS_MIPMAPLODBIAS:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_MIPMAPLODBIAS, pValue);
+	case D3D8TSS_MAXMIPLEVEL:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_MAXMIPLEVEL, pValue);
+	case D3D8TSS_MAXANISOTROPY:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_MAXANISOTROPY, pValue);
+	case D3D8TSS_ADDRESSW:
+		return pDevice9->GetSamplerState(Stage, D3DSAMP_ADDRESSW, pValue);
+	}
+	return D3DERR_INVALIDCALL;
 }
 
-STDMETHODIMP CDirect3DDevice8::SetTextureStageState(THIS_ DWORD Stage, D3DTEXTURESTAGESTATETYPE Type, DWORD Value)
+STDMETHODIMP CDirect3DDevice8::SetTextureStageState(THIS_ DWORD Stage, D3D8TEXTURESTAGESTATETYPE Type, DWORD Value)
 {
-	return pDevice9->SetTextureStageState(Stage, Type, Value);
+	switch (Type)
+	{
+	case D3D8TSS_COLOROP:
+	case D3D8TSS_COLORARG1:
+	case D3D8TSS_COLORARG2:
+	case D3D8TSS_ALPHAOP:
+	case D3D8TSS_ALPHAARG1:
+	case D3D8TSS_ALPHAARG2:
+	case D3D8TSS_BUMPENVMAT00:
+	case D3D8TSS_BUMPENVMAT01:
+	case D3D8TSS_BUMPENVMAT10:
+	case D3D8TSS_BUMPENVMAT11:
+	case D3D8TSS_TEXCOORDINDEX:
+	case D3D8TSS_BUMPENVLSCALE:
+	case D3D8TSS_BUMPENVLOFFSET:
+	case D3D8TSS_TEXTURETRANSFORMFLAGS:
+	case D3D8TSS_COLORARG0:
+	case D3D8TSS_ALPHAARG0:
+	case D3D8TSS_RESULTARG:
+		return pDevice9->SetTextureStageState(Stage, (D3DTEXTURESTAGESTATETYPE)Type, Value);
+	case D3D8TSS_ADDRESSU:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_ADDRESSU, Value);
+	case D3D8TSS_ADDRESSV:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_ADDRESSV, Value);
+	case D3D8TSS_BORDERCOLOR:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_BORDERCOLOR, Value);
+	case D3D8TSS_MAGFILTER:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_MAGFILTER, Value);
+	case D3D8TSS_MINFILTER:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_MINFILTER, Value);
+	case D3D8TSS_MIPFILTER:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_MIPFILTER, Value);
+	case D3D8TSS_MIPMAPLODBIAS:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_MIPMAPLODBIAS, Value);
+	case D3D8TSS_MAXMIPLEVEL:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_MAXMIPLEVEL, Value);
+	case D3D8TSS_MAXANISOTROPY:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_MAXANISOTROPY, Value);
+	case D3D8TSS_ADDRESSW:
+		return pDevice9->SetSamplerState(Stage, D3DSAMP_ADDRESSW, Value);
+	}
+	return D3DERR_INVALIDCALL;
 }
 
 STDMETHODIMP CDirect3DDevice8::ValidateDevice(THIS_ DWORD* pNumPasses)
@@ -702,11 +793,17 @@ STDMETHODIMP CDirect3DDevice8::GetStreamSource(THIS_ UINT StreamNumber, IDirect3
 	return hr;
 }
 
+
 STDMETHODIMP CDirect3DDevice8::SetIndices(THIS_ IDirect3DIndexBuffer8* pIndexData, UINT BaseVertexIndex)
 {
-	baseVertexIndex = BaseVertexIndex;
+	if (BaseVertexIndex > 0x7FFFFFFF) return D3DERR_INVALIDCALL;
 	IDirect3DIndexBuffer9* pIndexData9 = ((CDirect3DIndexBuffer8*)pIndexData)->ToNine();
-	return pDevice9->SetIndices(pIndexData9);
+	HRESULT hr = pDevice9->SetIndices(pIndexData9);
+	if (SUCCEEDED(hr))
+	{
+		baseVertexIndex = BaseVertexIndex;
+	}
+	return hr;
 }
 
 STDMETHODIMP CDirect3DDevice8::GetIndices(THIS_ IDirect3DIndexBuffer8** ppIndexData, UINT* pBaseVertexIndex)

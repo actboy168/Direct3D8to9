@@ -23,7 +23,7 @@ private:
 	CDirect3D8* pDirect3D8;
 	BOOL zBufferDiscardingEnabled;
 	D3DDEVICE_CREATION_PARAMETERS deviceCreationParameters;
-	UINT baseVertexIndex;
+	INT baseVertexIndex;
 
 public:
 	CObjectPool<CDirect3DCubeTexture8>   CubeTexturePool;
@@ -101,8 +101,8 @@ public:
 	STDMETHOD(GetClipStatus)(THIS_ D3DCLIPSTATUS8* pClipStatus);
 	STDMETHOD(GetTexture)(THIS_ DWORD Stage,IDirect3DBaseTexture8** ppTexture);
 	STDMETHOD(SetTexture)(THIS_ DWORD Stage,IDirect3DBaseTexture8* pTexture);
-	STDMETHOD(GetTextureStageState)(THIS_ DWORD Stage,D3DTEXTURESTAGESTATETYPE Type,DWORD* pValue);
-	STDMETHOD(SetTextureStageState)(THIS_ DWORD Stage,D3DTEXTURESTAGESTATETYPE Type,DWORD Value);
+	STDMETHOD(GetTextureStageState)(THIS_ DWORD Stage,D3D8TEXTURESTAGESTATETYPE Type,DWORD* pValue);
+	STDMETHOD(SetTextureStageState)(THIS_ DWORD Stage,D3D8TEXTURESTAGESTATETYPE Type,DWORD Value);
 	STDMETHOD(ValidateDevice)(THIS_ DWORD* pNumPasses);
 	STDMETHOD(GetInfo)(THIS_ DWORD DevInfoID,void* pDevInfoStruct,DWORD DevInfoStructSize);
 	STDMETHOD(SetPaletteEntries)(THIS_ UINT PaletteNumber,CONST PALETTEENTRY* pEntries);

@@ -124,6 +124,38 @@ typedef struct _D3DADAPTER_IDENTIFIER8
 
 } D3DADAPTER_IDENTIFIER8;
 
+typedef enum _D3D8TEXTURESTAGESTATETYPE
+{
+    D3D8TSS_COLOROP        =  1, /* D3DTEXTUREOP - per-stage blending controls for color channels */
+    D3D8TSS_COLORARG1      =  2, /* D3DTA_* (texture arg) */
+    D3D8TSS_COLORARG2      =  3, /* D3DTA_* (texture arg) */
+    D3D8TSS_ALPHAOP        =  4, /* D3DTEXTUREOP - per-stage blending controls for alpha channel */
+    D3D8TSS_ALPHAARG1      =  5, /* D3DTA_* (texture arg) */
+    D3D8TSS_ALPHAARG2      =  6, /* D3DTA_* (texture arg) */
+    D3D8TSS_BUMPENVMAT00   =  7, /* float (bump mapping matrix) */
+    D3D8TSS_BUMPENVMAT01   =  8, /* float (bump mapping matrix) */
+    D3D8TSS_BUMPENVMAT10   =  9, /* float (bump mapping matrix) */
+    D3D8TSS_BUMPENVMAT11   = 10, /* float (bump mapping matrix) */
+    D3D8TSS_TEXCOORDINDEX  = 11, /* identifies which set of texture coordinates index this texture */
+    D3D8TSS_ADDRESSU       = 13, /* D3DTEXTUREADDRESS for U coordinate */
+    D3D8TSS_ADDRESSV       = 14, /* D3DTEXTUREADDRESS for V coordinate */
+    D3D8TSS_BORDERCOLOR    = 15, /* D3DCOLOR */
+    D3D8TSS_MAGFILTER      = 16, /* D3DTEXTUREFILTER filter to use for magnification */
+    D3D8TSS_MINFILTER      = 17, /* D3DTEXTUREFILTER filter to use for minification */
+    D3D8TSS_MIPFILTER      = 18, /* D3DTEXTUREFILTER filter to use between mipmaps during minification */
+    D3D8TSS_MIPMAPLODBIAS  = 19, /* float Mipmap LOD bias */
+    D3D8TSS_MAXMIPLEVEL    = 20, /* DWORD 0..(n-1) LOD index of largest map to use (0 == largest) */
+    D3D8TSS_MAXANISOTROPY  = 21, /* DWORD maximum anisotropy */
+    D3D8TSS_BUMPENVLSCALE  = 22, /* float scale for bump map luminance */
+    D3D8TSS_BUMPENVLOFFSET = 23, /* float offset for bump map luminance */
+    D3D8TSS_TEXTURETRANSFORMFLAGS = 24, /* D3DTEXTURETRANSFORMFLAGS controls texture transform */
+    D3D8TSS_ADDRESSW       = 25, /* D3DTEXTUREADDRESS for W coordinate */
+    D3D8TSS_COLORARG0      = 26, /* D3DTA_* third arg for triadic ops */
+    D3D8TSS_ALPHAARG0      = 27, /* D3DTA_* third arg for triadic ops */
+    D3D8TSS_RESULTARG      = 28, /* D3DTA_* arg for result (CURRENT or TEMP) */
+    D3D8TSS_FORCE_DWORD   = 0x7fffffff, /* force 32-bit size enum */
+} D3D8TEXTURESTAGESTATETYPE;
+
 #define D3DCLIPSTATUS8 D3DCLIPSTATUS9
 #define D3DMATERIAL8 D3DMATERIAL9
 #define D3DVIEWPORT8 D3DVIEWPORT9

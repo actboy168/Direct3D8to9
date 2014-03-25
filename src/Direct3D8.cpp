@@ -62,6 +62,9 @@ STDMETHODIMP CDirect3D8::GetAdapterIdentifier(THIS_ UINT Adapter, DWORD Flags, D
 {
 	D3DADAPTER_IDENTIFIER9 D3DIdentifier9;
 
+	if (Flags == 0) { Flags = 2; }
+	else if (Flags == 2) { Flags = 0; }
+
 	HRESULT result = pDirect3D9->GetAdapterIdentifier(Adapter, Flags, &D3DIdentifier9);
 
 	strncpy_s(pIdentifier->Driver, MAX_DEVICE_IDENTIFIER_STRING, D3DIdentifier9.Driver, MAX_DEVICE_IDENTIFIER_STRING);
